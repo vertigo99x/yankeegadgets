@@ -1,0 +1,669 @@
+{% load static %}
+
+{% include 'base.html' %}
+
+<body>
+    <!-- [if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif] -->
+    <!-- Begin Body Wrapper -->
+
+    <div class="body-wrapper">
+        <!-- Begin Header Area -->
+        {% include 'header.html' %}
+
+        <!-- Header Area End Here -->
+        <!-- Begin Slider With Banner Area -->
+
+        <div class="slider-with-banner">
+            <div class="container">
+                <div class="row">
+                    <!-- Begin Slider Area -->
+
+                    <div class="col-lg-12 col-md-12">
+                        <div class="slider-area">
+                            <div class="slider-active owl-carousel">
+                                <!-- Begin Single Slide Area -->
+                                <!-- <div class="single-slide align-center-left  animation-style-01 bg-1">
+                                        <div class="slider-progress"></div>
+                                        <div class="slider-content">
+                                            <h5>Sale Offer <span>-20% Off</span> This Week</h5>
+                                            <h2>Chamcham Galaxy S9 | S9+</h2>
+                                            <h3>Starting at <span>$1209.00</span></h3>
+                                            <div class="default-btn slide-btn">
+                                                <a class="links" href="shop-left-sidebar.html">Shopping Now</a>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                <!-- Single Slide Area End Here -->
+                                <!-- Begin Single Slide Area -->
+                                {% for ads in adBanner %}
+                                    
+                                        
+                                        {% if ads.active %}
+
+                                <div
+                                    class="single-slide align-center-left  animation-style-01 bg-1"
+                                    style="background-image:url('{{ ads.get_image }}')"
+                                >
+                                    <div class="slider-progress"></div>
+
+                                    <div class="slider-content">
+                                        <h5>
+                                            Sale Offer
+
+                                            <span>{{ ads.offer_event }}</span>
+
+                                            This Week
+                                        </h5>
+
+                                        <h2>{{ ads.product_name }}</h2>
+
+                                        <h3>
+                                            Starting at
+
+                                            <span>₦{{ads.starting_price}}</span>
+                                        </h3>
+
+                                        <div class="default-btn slide-btn">
+                                            <a
+                                                class="links"
+                                                href="shop-left-sidebar.html"
+                                            >Start Shopping Now</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="overlay"></div>
+                                </div>
+
+                                {% endif %}
+                                            
+                                    {% endfor %}
+
+                                <!-- Single Slide Area End Here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slider Area End Here -->
+                    <!-- Begin Li Banner Area -->
+                    <!-- Li Banner Area End Here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider With Banner Area End Here -->
+        <!-- Begin Product Area -->
+
+        <div class="product-area pt-60 pb-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="li-product-tab">
+                            <ul class="nav li-product-menu">
+                                <li>
+                                    <a
+                                        class="active"
+                                        data-toggle="tab"
+                                        href="#li-new-product"
+                                    >
+                                        <span>New Products</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Begin Li's Tab Menu Content Area -->
+                    </div>
+                </div>
+
+                <div class="tab-content">
+                    <div
+                        id="li-new-product"
+                        class="tab-pane active show"
+                        role="tabpanel"
+                    >
+                        <div class="row">
+                            <div class="product-active owl-carousel">
+                                {% for new in new_arrivals %}
+                                       
+                                       {% if new.is_in_stock %}
+
+                                <div class="col-lg-12">
+                                    <!-- single-product-wrap start -->
+
+                                    <div class="single-product-wrap">
+                                        <div class="product-image">
+                                            <a href="{% url 'getItem' new.category.slug new.slug %}">
+                                                <img
+                                                    src="{{ new.get_thumbnail }}"
+                                                    alt="Li's Product Image"
+                                                >
+                                            </a>
+
+                                            <span class="sticker">New</span>
+                                        </div>
+
+                                        <div class="product_desc">
+                                            <div class="product_desc_info">
+                                                <div class="product-review">
+                                                    <h5 class="manufacturer">
+                                                        <a href="shop-left-sidebar.html">{{ new.category }}</a>
+                                                    </h5>
+
+                                                    <div class="rating-box">
+                                                        <ul class="rating">
+                                                            {% for x in new.get_colored_stars %}
+
+                                                            <li>
+                                                                <i class="fa fa-star-o"></i>
+                                                            </li>
+
+                                                            {% endfor %}
+                                                                {% for x in new.get_blank_stars %}
+
+                                                            <li class="no-star">
+                                                                <i class="fa fa-star-o"></i>
+                                                            </li>
+
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                                <h4>
+                                                    <a
+                                                        class="product_name"
+                                                        href="{% url 'getItem' new.category.slug new.slug %}"
+                                                    >{{ new.name }}</a>
+                                                </h4>
+
+                                                <div class="price-box">
+                                                    {% if new.get_percentage_discount %}
+
+                                                    <span class="new-price">₦{{ new.sales_price }}</span>
+
+                                                    <span class="old-price">₦{{ new.price }}</span>
+
+                                                    <span class="discount-percentage">
+                                                        -{{ new.get_percentage_discount }}%
+                                                    </span>
+
+                                                    {% else %}
+
+                                                    <span class="new-price">₦{{ new.price }}</span>
+
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="add-actions">
+                                                <ul class="add-actions-link">
+                                                    <li class="add-cart active">
+                                                        <span onclick="addToCart('{{ new.uid }}','{{ new.name }}', '{{ new.price }}',1, '{{ new.get_thumbnail }}','{{ new.category.slug }}','{{ new.slug }}');">Add to cart</span>
+                                                    </li>
+
+                                                    <li onclick="addToWishList('{{ new.uid }}')">
+                                                        <span class="links-details">
+                                                            <i class="fa fa-heart-o"></i>
+                                                        </span>
+                                                    </li>
+
+                                                    {% if new.get_percentage_discount %}
+
+                                                    <li>
+                                                        <a
+                                                            href="#"
+                                                            onclick="peek('{{ new.name }}','{{ new.category }}', '{{ new.sales_price }}', '{{ new.get_image_list_string }}', '{{ new.uid }}', `{{ new.description|description_strip}}`,'{{ new.get_colored_stars|length }}', '{{ new.get_blank_stars|length }}', '{{new.is_in_stock|checkTrue}}') ;"
+                                                            title="quick view"
+                                                            class="quick-view-btn"
+                                                            data-toggle="modal"
+                                                            data-target="#exampleModalCenter"
+                                                        >
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+                                                    </li>
+
+                                                    {% else %}
+
+                                                    <li>
+                                                        <a
+                                                            href="#"
+                                                            onclick="peek('{{ new.name }}','{{ new.category }}', '{{ new.price }}', '{{ new.get_image_list_string }}', '{{ new.uid }}', `{{ new.description|description_strip}}`,'{{ new.get_colored_stars|length }}', '{{ new.get_blank_stars|length }}', '{{new.is_in_stock|checkTrue}}') ;"
+                                                            title="quick view"
+                                                            class="quick-view-btn"
+                                                            data-toggle="modal"
+                                                            data-target="#exampleModalCenter"
+                                                        >
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+                                                    </li>
+
+                                                    {% endif %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- single-product-wrap end -->
+                                </div>
+
+                                {% endif %}
+                                        
+                                    {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Area End Here -->
+        <!-- Begin Li's Static Banner Area -->
+        <!-- Li's Static Banner Area End Here -->
+        <!-- Begin Li's Laptop Product Area -->
+        {% for category in category_items %}
+               
+               {% if category.products %}
+
+        <section class="product-area li-laptop-product pt-60 pb-45">
+            <div class="container">
+                <div class="row">
+                    <!-- Begin Li's Section Area -->
+
+                    <div class="col-lg-12">
+                        <div class="li-section-title">
+                            <h2>
+                                <span style="text-transform:capitalize;">{{ category.category_name }}</span>
+                            </h2>
+                        </div>
+
+                        <div class="row">
+                            <div class="product-active owl-carousel">
+                                {% for new in category.products %}
+                                        
+                                        {% if new.is_in_stock %}
+
+                                <div class="col-lg-12">
+                                    <!-- single-product-wrap start -->
+
+                                    <div class="single-product-wrap">
+                                        <div class="product-image">
+                                            <a href="{% url 'getItem' new.category.slug new.slug %}">
+                                                <img
+                                                    src="{{ new.get_thumbnail }}"
+                                                    alt="Li's Product Image"
+                                                >
+                                            </a>
+                                        </div>
+
+                                        <div class="product_desc">
+                                            <div class="product_desc_info">
+                                                <div class="product-review">
+                                                    <h5 class="manufacturer">
+                                                        <a href="shop-left-sidebar.html">{{ new.category.name }}</a>
+                                                    </h5>
+
+                                                    <div class="rating-box">
+                                                        <ul class="rating">
+                                                            {% for x in new.get_colored_stars %}
+
+                                                            <li>
+                                                                <i class="fa fa-star-o"></i>
+                                                            </li>
+
+                                                            {% endfor %}
+                                                                {% for x in new.get_blank_stars %}
+
+                                                            <li class="no-star">
+                                                                <i class="fa fa-star-o"></i>
+                                                            </li>
+
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                                <h4>
+                                                    <a
+                                                        class="product_name"
+                                                        href="{% url 'getItem' new.category.slug new.slug %}"
+                                                    >{{ new.name }}</a>
+                                                </h4>
+
+                                                <div class="price-box">
+                                                    {% if new.get_percentage_discount %}
+
+                                                    <span class="new-price">₦{{ new.sales_price }}</span>
+
+                                                    <span class="old-price">₦{{ new.price }}</span>
+
+                                                    <span class="discount-percentage">
+                                                        -{{ new.get_percentage_discount }}%
+                                                    </span>
+
+                                                    {% else %}
+
+                                                    <span class="new-price">₦{{ new.price }}</span>
+
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="add-actions">
+                                                <ul class="add-actions-link">
+                                                    <li class="add-cart active">
+                                                        <span onclick="addToCart('{{ new.uid }}','{{ new.name }}', '{{ new.price }}', 1,'{{ new.get_thumbnail }}');">Add to cart</span>
+                                                    </li>
+
+                                                    <li>
+                                                        <span
+                                                            class="links-details"
+                                                            href="#"
+                                                            onclick="addToWishList('{{ new.uid }}')"
+                                                        >
+                                                            <i class="fa fa-heart-o"></i>
+                                                        </span>
+                                                    </li>
+
+                                                    <li>
+                                                        <a
+                                                            href="#"
+                                                            title="quick view"
+                                                            class="quick-view-btn"
+                                                            data-toggle="modal"
+                                                            data-target="#exampleModalCenter"
+                                                        >
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- single-product-wrap end -->
+                                </div>
+
+                                {% endif %}
+                                            
+                                    {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Li's Section Area End Here -->
+                </div>
+            </div>
+        </section>
+
+        {% endif %}
+                
+            {% endfor %}
+
+        <!-- Li's TV & Audio Product Area End Here -->
+        <!-- Begin Li's Static Home Area -->
+        <!-- Li's Trendding Products Area End Here -->
+        <!-- Begin Footer Area -->
+        <!-- Footer Area End Here -->
+        <!-- Begin Quick View | Modal Area -->
+
+        <div
+            class="modal fade modal-wrapper"
+            id="exampleModalCenter"
+        >
+            <div
+                class="modal-dialog modal-dialog-centered"
+                role="document"
+                style="z-index:999"
+            >
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <span aria-huidden="true">&times;</span>
+                        </button>
+
+                        <div class="modal-inner-area row">
+                            <div class="col-lg-5 col-md-6 col-sm-6">
+                                <!-- Product Details Left -->
+
+                                <div class="product-details-left">
+                                    <div class="product-details-images sluider-navigation-1">
+                                        <div class="lg-image">
+                                            <img
+                                                src="{% static 'images/product/large-size/1.jpg' %}"
+                                                alt="product image"
+                                            >
+                                        </div>
+
+                                        <div class="lg-image">
+                                            <img
+                                                src="{% static 'images/product/large-size/2.jpg' %}"
+                                                alt="product image"
+                                            >
+                                        </div>
+
+                                        <div class="lg-image">
+                                            <img
+                                                src="{% static 'images/product/large-size/3.jpg' %}"
+                                                alt="product image"
+                                            >
+                                        </div>
+
+                                        <div class="lg-image">
+                                            <img
+                                                src="{% static 'images/product/large-size/4.jpg' %}"
+                                                alt="product image"
+                                            >
+                                        </div>
+
+                                        <div class="lg-image">
+                                            <img
+                                                src="{% static 'images/product/large-size/5.jpg' %}"
+                                                alt="product image"
+                                            >
+                                        </div>
+
+                                        <div class="lg-image">
+                                            <img
+                                                src="{% static 'images/product/large-size/6.jpg' %}"
+                                                alt="product image"
+                                            >
+                                        </div>
+                                    </div>
+
+                                    <div class="product-details-thumbs sluider-thumbs-1">
+                                        <div class="sm-image">
+                                            <img
+                                                src="{% static 'images/product/small-size/1.jpg' %}"
+                                                alt="product image thumb"
+                                            >
+                                        </div>
+
+                                        <div class="sm-image">
+                                            <img
+                                                src="{% static 'images/product/small-size/2.jpg' %}"
+                                                alt="product image thumb"
+                                            >
+                                        </div>
+
+                                        <div class="sm-image">
+                                            <img
+                                                src="{% static 'images/product/small-size/3.jpg' %}"
+                                                alt="product image thumb"
+                                            >
+                                        </div>
+
+                                        <div class="sm-image">
+                                            <img
+                                                src="{% static 'images/product/small-size/4.jpg' %}"
+                                                alt="product image thumb"
+                                            >
+                                        </div>
+
+                                        <div class="sm-image">
+                                            <img
+                                                src="{% static 'images/product/small-size/5.jpg' %}"
+                                                alt="product image thumb"
+                                            >
+                                        </div>
+
+                                        <div class="sm-image">
+                                            <img
+                                                src="{% static 'images/product/small-size/6.jpg' %}"
+                                                alt="product image thumb"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- // Product Details Left -->
+                            </div>
+
+                            <div class="col-lg-7 col-md-6 col-sm-6">
+                                <div class="product-details-view-content pt-60">
+                                    <div class="product-info">
+                                        <h2>${title}</h2>
+
+                                        <span class="product-details-ref">${category}</span>
+
+                                        <div class="rating-box pt-20">
+                                            <ul class="rating rating-with-review-item">
+                                                <li>
+                                                    <i class="fa fa-star-o"></i>
+                                                </li>
+
+                                                <li>
+                                                    <i class="fa fa-star-o"></i>
+                                                </li>
+
+                                                <li>
+                                                    <i class="fa fa-star-o"></i>
+                                                </li>
+
+                                                <li class="no-star">
+                                                    <i class="fa fa-star-o"></i>
+                                                </li>
+
+                                                <li class="no-star">
+                                                    <i class="fa fa-star-o"></i>
+                                                </li>
+
+                                                <li class="review-item">
+                                                    <a href="#">Read Review</a>
+                                                </li>
+
+                                                <li class="review-item">
+                                                    <a href="#">Write Review</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="price-box pt-20">
+                                            <span class="new-price new-price-2">${price}</span>
+                                        </div>
+
+                                        <div class="product-desc">
+                                            <p>
+                                                <span>${description}</span>
+                                            </p>
+                                        </div>
+
+                                        <div class="single-add-to-cart">
+                                            <form
+                                                action="#"
+                                                class="cart-quantity"
+                                            >
+                                                <div class="quantity">
+                                                    <label>Quantity</label>
+
+                                                    <div class="cart-plus-minus">
+                                                        <input
+                                                            class="cart-plus-minus-box"
+                                                            value="1"
+                                                            type="text"
+                                                        ></input>
+
+                                                        <div class="dec qtybutton">
+                                                            <i class="fa fa-angle-down"></i>
+                                                        </div>
+
+                                                        <div class="inc qtybutton">
+                                                            <i class="fa fa-angle-up"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <button
+                                                    class="add-to-cart"
+                                                    type="submit"
+                                                >Add to cart</button>
+                                            </form>
+                                        </div>
+
+                                        <div class="product-additional-info pt-25">
+                                            <a
+                                                class="wishlist-btn"
+                                                href="wishlist.html"
+                                            >
+                                                <i class="fa fa-heart-o"></i>
+                                                Add to wishlist
+                                            </a>
+
+                                            <div class="product-social-sharing pt-25">
+                                                <ul>
+                                                    <li class="facebook">
+                                                        <a href="#">
+                                                            <i class="fa fa-facebook"></i>
+                                                            Facebook
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="twitter">
+                                                        <a href="#">
+                                                            <i class="fa fa-twitter"></i>
+                                                            Twitter
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="google-plus">
+                                                        <a href="#">
+                                                            <i class="fa fa-google-plus"></i>
+                                                            Google +
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="instagram">
+                                                        <a href="#">
+                                                            <i class="fa fa-instagram"></i>
+                                                            Instagram
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick View | Modal Area End Here -->
+    </div>
+
+    <!-- Body Wrapper End Here -->
+    <!-- jQuery-V1.12.4 -->
+    {% include 'footer.html' %}
+                
+       {% include 'scripts.html' %}
+</body>
+
+<!-- index30:23 -->

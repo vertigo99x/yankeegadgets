@@ -1,0 +1,213 @@
+{% load static %}
+
+<div class="loading-bar">
+    <div class="loader">
+        <div class="loader2"></div>
+    </div>
+</div>
+
+<header>
+    {{ request.user.id|json_script:"user_req_id" }}
+
+    <!-- Begin Header Top Area -->
+
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <!-- Begin Header Top Left Area -->
+                <!-- Header Top Left Area End Here -->
+                <!-- Begin Header Top Right Area -->
+
+                <div class="col-lg-10 col-md-10">
+                    <div class="header-top-right">
+                        <ul class="ht-menu">
+                            <!-- Begin Setting Area -->
+                            {% if not user.is_authenticated %}
+
+                            <li>
+                                <div class="">
+                                    <span>
+                                        <a
+                                            href="{% url 'login-page' %}"
+                                            style="font-size:16px;color:var(--white);background:var(--orange);padding:.5rem 1rem;margin-bottom:1rem;"
+                                        >Sign In</a>
+                                    </span>
+                                </div>
+                            </li>
+
+                            <!-- Setting Area End Here -->
+                            {% else %}
+
+                            <li>
+                                <div class="">
+                                    <span>
+                                        <a
+                                            href="{% url 'login-page' %}"
+                                            style="font-size:16px;color:var(--white);background:var(--orange);padding:.5rem 1rem;margin-bottom:1rem;"
+                                        >My Account</a>
+                                    </span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="logout">
+                                    <span>
+                                        <a
+                                            href="{% url 'logout-page' %}"
+                                            style="font-size:16px;color:var(--white);background:var(--danger);padding:.5rem 1rem;margin-bottom:1rem;margin-left:1rem;"
+                                        >Logout</a>
+                                    </span>
+                                </div>
+                            </li>
+
+                            <li id="hidden-hello">
+                                Hello, {{ user.username|firstname }}
+                            </li>
+
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Header Top Right Area End Here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Top Area End Here -->
+    <!-- Begin Header Middle Area -->
+
+    <div class="header-middle pl-sm-0 pr-sm-0 pl-xs-0 pr-xs-0">
+        <div class="container">
+            <div class="row">
+                <!-- Begin Header Logo Area -->
+
+                <div class="col-lg-3">
+                    <div class="logo pb-sm-30 pb-xs-30">
+                        <a href="{% url 'index' %}">
+                            <img
+                                src="{% static 'logo_black_small.png' %}"
+                                alt=""
+                            >
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Header Logo Area End Here -->
+                <!-- Begin Header Middle Right Area -->
+
+                <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
+                    <!-- Begin Header Middle Searchbox Area -->
+
+                    <form
+                        action="{% url 'search' %}"
+                        class="hm-searchbox"
+                        method="GET"
+                    >
+                        <input
+                            type="text"
+                            placeholder="Enter your search key ..."
+                            name="searchphrase"
+                            value="{{ search_phrase }}"
+                            required="required"
+                        ></input>
+
+                        <button
+                            class="li-btn"
+                            type="submit"
+                        >
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+
+                    <!-- Header Middle Searchbox Area End Here -->
+                    <!-- Begin Header Middle Right Area -->
+
+                    <div class="header-middle-right">
+                        <ul class="hm-menu">
+                            <!-- Begin Header Middle Wishlist Area -->
+
+                            <li class="hm-wishlist">
+                                <a href="{% url 'wishlist' %}">
+                                    <span
+                                        class="cart-item-count wishlist-item-count"
+                                        id="wishlist_count"
+                                    >{{ wishlist_count }}</span>
+
+                                    <i class="fa fa-heart-o"></i>
+                                </a>
+                            </li>
+
+                            <!-- Header Middle Wishlist Area End Here -->
+                            <!-- Begin Header Mini Cart Area -->
+
+                            <li
+                                class="hm-minicart"
+                                style="z-index:999 !important;"
+                            >
+                                <div class="hm-minicart-trigger">
+                                    <span class="item-icon"></span>
+
+                                    <span class="item-text">
+                                        ₦0
+
+                                        <span class="cart-item-count">0</span>
+                                    </span>
+                                </div>
+
+                                <span></span>
+
+                                <div class="minicart">
+                                    <ul class="minicart-product-list"></ul>
+
+                                    <p class="minicart-total">
+                                        SUBTOTAL:
+
+                                        <span id="cart_total">₦0</span>
+                                    </p>
+
+                                    <div class="minicart-button">
+                                        <a
+                                            href="shopping-cart.html"
+                                            class="li-button li-button-fullwidth li-button-dark"
+                                        >
+                                            <span>View Full Cart</span>
+                                        </a>
+
+                                        <a
+                                            href="checkout.html"
+                                            class="li-button li-button-fullwidth"
+                                        >
+                                            <span>Checkout</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <!-- Header Mini Cart Area End Here -->
+                        </ul>
+                    </div>
+
+                    <!-- Header Middle Right Area End Here -->
+                </div>
+
+                <!-- Header Middle Right Area End Here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Middle Area End Here -->
+    <!-- Begin Header Bottom Area -->
+    <!-- Header Bottom Area End Here -->
+    <!-- Begin Mobile Menu Area -->
+
+    <div class="mobile-menu-area d-lg-none d-xl-none col-12">
+        <div class="container">
+            <div class="row">
+                <div class="mobile-menu"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Area End Here -->
+</header>
