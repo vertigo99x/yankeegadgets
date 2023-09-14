@@ -81,7 +81,8 @@ def logout(request):
     return redirect('index')
     
     
-    
+def base(request):
+    return HttpResponse(request, "HELLO")
 
 
 

@@ -8,7 +8,8 @@ urlpatterns = [
     path('user/login',views.LoginView.as_view(),name="login-page"),
     path('user/logout',views.logout,name="logout-page"),
     
-    path('',views.HomeView.as_view(),name="index"),
+    path('',views.base,name="home"),
+    path('lol',views.HomeView.as_view(),name="index"),
     path('search',views.SearchView.as_view(),name="search"),
     
     path('wishlist',views.WishListView.as_view(),name="wishlist"),
