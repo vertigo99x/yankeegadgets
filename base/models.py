@@ -14,7 +14,7 @@ host = settings.MAINHOSTNAME
 
 
 
-def gpip enerate_search_tags(product_name, color, brand):
+def generate_search_tags(product_name, color, brand):
     tags = []
     # Include the entire product name as a search tag
     tags.append(product_name.lower())
