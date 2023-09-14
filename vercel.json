@@ -1,0 +1,23 @@
+{
+    "version": 2,
+    "builds":[
+    {
+        "src":"yankeegadgets/wsgi.py",
+        "use":"@vercel/python",
+        "config": {"maxLambdaSize":"15mb","runtime":"python3.9"}
+    },
+    {
+        "src":"build_file.sh",
+        "use":"@vercel/static-build",
+        "config":{
+            "distDir":"staticfiles_build"
+        }
+    }],
+    "routes":[
+        {
+            "src":"/(.*)",
+            "dest":"yankeegadgets/wsgi.py"
+        }
+    ],
+    "outputDirectory": "staticfiles_build"
+}
