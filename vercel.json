@@ -21,7 +21,7 @@
   },
   "functions": {
     "api": {
-      "memory": 256,
+      "memory": 128,
       "maxDuration": 30
     }
   },
