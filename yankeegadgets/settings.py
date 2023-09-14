@@ -83,11 +83,23 @@ WSGI_APPLICATION = 'yankeegadgets.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+"""
+
+DATABASES = {
+    'default': {
+        'ENGINE': os.environ['ENGINE'],
+        'NAME': os.environ['NAME'],
+        'HOST': os.environ['HOST'],
+        'USER': os.environ['USER'],
+        'PASSWORD': os.environ['PASSWORD'],
+        'PORT': os.environ['PORT'],
     }
 }
 
