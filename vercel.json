@@ -19,11 +19,5 @@
   "env": {
     "DJANGO_SETTINGS_MODULE": "yankeegadgets.settings"
   },
-  "functions": {
-    "api": {
-      "memory": 128,
-      "maxDuration": 30
-    }
-  },
   "outputDirectory": "staticfiles_build"
 }
