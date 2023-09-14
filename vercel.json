@@ -2,7 +2,7 @@
     "version": 2,
     "builds":[
     {
-        "src":"yankeegadgets/wsgi.py",
+        "src":"yankeegadgets/asgi.py",
         "use":"@vercel/python",
         "config": {"maxLambdaSize":"15mb","runtime":"python3.9"}
     },
@@ -16,8 +16,19 @@
     "routes":[
         {
             "src":"/(.*)",
-            "dest":"yankeegadgets/wsgi.py"
+            "dest":"yankeegadgets/asgi.py"
         }
     ],
+    "env": {
+        "DJANGO_SETTINGS_MODULE": "yankeegadgets.settings"
+    },
+    "functions": {
+        "api": {
+        "memory": 256,
+        "maxDuration": 30
+        }
+    },
+     "startDevServer": true,
+    "devCommand": "uvicorn yankeegadgets.asgi:application --port $PORT",
     "outputDirectory": "staticfiles_build"
 }
