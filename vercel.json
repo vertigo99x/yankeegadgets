@@ -1,34 +1,29 @@
 {
-    "version": 2,
-    "builds":[
+  "version": 2,
+  "builds": [
     {
-        "src":"yankeegadgets/asgi.py",
-        "use":"@vercel/python",
-        "config": {"maxLambdaSize":"15mb","runtime":"python3.9"}
-    },
+      "src": "yankeegadgets/asgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.9"
+      }
+    }
+  ],
+  "routes": [
     {
-        "src":"build_file.sh",
-        "use":"@vercel/static-build",
-        "config":{
-            "distDir":"staticfiles_build"
-        }
-    }],
-    "routes":[
-        {
-            "src":"/(.*)",
-            "dest":"yankeegadgets/asgi.py"
-        }
-    ],
-    "env": {
-        "DJANGO_SETTINGS_MODULE": "yankeegadgets.settings"
-    },
-    "functions": {
-        "api": {
-        "memory": 256,
-        "maxDuration": 30
-        }
-    },
-     "startDevServer": true,
-    "devCommand": "uvicorn yankeegadgets.asgi:application --port $PORT",
-    "outputDirectory": "staticfiles_build"
+      "src": "/(.*)",
+      "dest": "yankeegadgets/asgi.py"
+    }
+  ],
+  "env": {
+    "DJANGO_SETTINGS_MODULE": "yankeegadgets.settings"
+  },
+  "functions": {
+    "api": {
+      "memory": 256,
+      "maxDuration": 30
+    }
+  },
+  "outputDirectory": "staticfiles_build"
 }
