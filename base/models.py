@@ -41,13 +41,6 @@ def generate_search_tags(product_name, color, brand):
 
 
 
-def run_async_function_in_thread(async_function, *args, **kwargs):
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    result = loop.run_until_complete(async_function(*args, **kwargs))
-    loop.close()
-    return result
-
 
 class Customers(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=False)

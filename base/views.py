@@ -26,7 +26,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 
-import asyncio
+#import asyncio
 import requests
 
 
@@ -61,6 +61,7 @@ def firstname(value):
 def toInt(value):
     return int(value)
 
+"""
 
 def run_async_function_in_thread(async_function, *args, **kwargs):
     loop = asyncio.new_event_loop()
@@ -69,6 +70,7 @@ def run_async_function_in_thread(async_function, *args, **kwargs):
     loop.close()
     return result
 
+"""
 
 class LoginRequiredMixin(object):
     @classmethod
@@ -84,7 +86,7 @@ def logout(request):
 def base(request):
     return HttpResponse(request, "HELLO")
 
-
+"""
 
 class HomeView(View):
     def get(self, request, *args, **kwargs):
@@ -343,7 +345,7 @@ class GetCartDetails(APIView):
         pass
     
     
-    
+"""
     
     
     
